@@ -102,7 +102,6 @@ $fonMan = new FonctionManager($db);
 
     <?php }	else if ((!empty($_POST["telpro"]) OR empty($_POST["annee"])) AND !empty($_SESSION["nom"])) { ?>
 
-
     <?php	} else { ?>
 
 
