@@ -13,13 +13,11 @@ class DepartementManager {
      * @param $departement Departement
      */
     public function add($departement) {
-        $req = $this->db->prepare(
-                'INSERT INTO departement (dep_num, dep_nom, dep_vil)
-			VALUES (:dep_num, :dep_nom, :dep_vil)');
+        $req = $this->db->prepare('INSERT INTO departement (dep_num, dep_nom,vil_num) VALUES (:dep_num, :dep_nom, :dep_vil)');
 
-        $req->bindValues(':dep_num', $departement->getDep_num(), PDO::PARAM_STR);
-        $req->bindValues(':dep_nom', $departement->getDep_nom(), PDO::PARAM_STR);
-        $req->bindValues(':dep_vil', $departement->getDep_vil(), PDO::PARAM_STR);
+        $req->bindParam(':dep_num', $departement->getNumDep(), PDO::PARAM_INT);
+        $req->bindParam(':dep_nom', $departement->getNomDep(), PDO::PARAM_STR);
+        $req->bindParam(':dep_vil', $departement->getNumVille(), PDO::PARAM_INT);
 
 
         $req->execute();
@@ -31,8 +29,7 @@ class DepartementManager {
     public function getList() {
         $listeDepartements = array();
 
-        $sql = 'SELECT dep_num, dep_nom, dep_vil
-			FROM departement ORDER BY dep_num';
+        $sql = 'SELECT dep_num,dep_nom,vil_num FROM departement ORDER BY dep_num';
         $req = $this->db->query($sql);
 
         while ($departement = $req->fetch(PDO::FETCH_OBJ)) {
@@ -43,4 +40,3 @@ class DepartementManager {
     }
 }
 
-?>

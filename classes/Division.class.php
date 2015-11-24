@@ -1,39 +1,71 @@
 <?php
 class Division {
+  /**
+   * @var int
+   */
   private $div_num;
+  /**
+   * @var string
+   */
   private $div_nom;
 
-public function __construct($valeurs =array()){
-  if(!empty($valeurs)){
+  /**
+   * Division constructor.
+   * @param array $valeurs
+   */
+  public function __construct($valeurs = array())
+  {
+    if (!empty($valeurs)) {
       $this->affecte($valeurs);
-  }
-}
-
-public function affecte($donnees){
-  foreach ($donnees as $attribut => $valeur) {
-    switch($attribut){
-      case 'div_num': $this->setNumDiv($valeur);
-      break;
-      case 'div_nom': $this->setNomDiv($valeur);
-      break;
     }
   }
-}
 
-public function setNumDiv($id){
-  $this->div_num = $id;
-}
+  /**
+   * @param $donnees
+   */
+  public function affecte($donnees)
+  {
+    foreach ($donnees as $attribut => $valeur) {
+      switch ($attribut) {
+        case 'div_num':
+          $this->setNumDiv($valeur);
+          break;
+        case 'div_nom':
+          $this->setNomDiv($valeur);
+          break;
+      }
+    }
+  }
 
-public function setNomDiv($nom){
-  $this->div_nom = $nom;
-}
+  /**
+   * @param $id
+   */
+  public function setNumDiv($id)
+  {
+    $this->div_num = $id;
+  }
 
-public function getNumDiv(){
-  return $this->div_num;
-}
+  /**
+   * @param $nom
+   */
+  public function setNomDiv($nom)
+  {
+    $this->div_nom = $nom;
+  }
 
-public function getNomDiv(){
-  return $this->div_nom;
+  /**
+   * @return int
+   */
+  public function getNumDiv()
+  {
+    return $this->div_num;
+  }
+
+  /**
+   * @return string
+   */
+  public function getNomDiv()
+  {
+    return $this->div_nom;
+  }
 }
-}
-?>

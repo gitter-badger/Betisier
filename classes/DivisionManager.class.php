@@ -1,22 +1,31 @@
 <?php
 
 class DivisionManager {
-
+    /**
+     * DivisionManager constructor.
+     * @param $db MyPdo
+     */
     public function __construct($db) {
         $this->db = $db;
     }
 
+    /**
+     * @param $division Division
+     */
     public function add($division) {
         $req = $this->db->prepare(
-                'INSERT INTO ville (div_num, div_nom)
+            'INSERT INTO division (div_num, div_nom)
 			VALUES (:div_num, :div_nom)');
 
-        $req->bindValues(':div_num', $division->getDiv_num(), PDO::PARAM_STR);
-        $req->bindValues(':div_nom', $division->getDiv_nom(), PDO::PARAM_STR);
+        $req->bindParam(':div_num', $division->getNumDiv(), PDO::PARAM_STR);
+        $req->bindParam(':div_nom', $division->getNomDiv(), PDO::PARAM_STR);
 
         $req->execute();
     }
 
+    /**
+     * @return Division[]
+     */
     public function getList() {
         $listeDivisions = array();
 
@@ -27,11 +36,8 @@ class DivisionManager {
         while ($division = $req->fetch(PDO::FETCH_OBJ)) {
             $listeDivisions[] = new Division($division);
         }
-
-        return $listeDivisions;
         $req->closeCursor();
+        return $listeDivisions;
     }
 
 }
-
-?>
